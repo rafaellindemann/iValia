@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class TelaHome extends JFrame{
@@ -126,6 +129,25 @@ public class TelaHome extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 mostrarTodos();
+                System.out.println("kjahszfbkjs");
+                System.out.println("kjahszfbkjs");
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        });
+        txtItens.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                System.out.println(txtItens.getText());
+                filtro.clear();
+                String item = txtItens.getText();
+                for (Avaliacao a : BD){
+                    if(a.getItens().toLowerCase().contains(item.toLowerCase())){
+                        filtro.add(a);
+                    }
+                }
+                mostrarFiltro();
             }
         });
     }
